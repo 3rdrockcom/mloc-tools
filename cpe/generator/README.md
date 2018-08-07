@@ -1,6 +1,6 @@
 # Customer Profiling Engine Demo
 
-## Faker
+## Generator
 This project generates seed data accessible via REST-based API.
 
 ### Instructions
@@ -13,16 +13,13 @@ cd $GOPATH/src/github.com/epointpayment/mloc-tools/cpe/generator
 go get
 
 # Build exec
-go build -o faker
-
-# Create sqlite3 database
-touch faker.db
+go build -o generator
 
 # Seed the database
-./faker -seed -dsn=user:password@localhost:3306/dbname?parseTime=true
+./generator -seed -dsn=user:password@localhost:3306/dbname?parseTime=true
 
 # Start Server
-./faker -dsn=user:password@localhost:3306/dbname?parseTime=true
+./generator -dsn=user:password@localhost:3306/dbname?parseTime=true
 ```
 
 ### Endpoints
