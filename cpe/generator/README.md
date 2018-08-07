@@ -94,7 +94,7 @@ Output
       "Description":"J.C. Penny",
       "Credit":0,
       "Debit":212.77,
-      "Balance":239.1
+      "Balance":239.10
    },
    {
       "ID":219,
@@ -102,7 +102,7 @@ Output
       "DateTime":"2016-03-23T19:11:53-07:00",
       "Description":"Taco Bell",
       "Credit":0,
-      "Debit":239.1,
+      "Debit":239.10,
       "Balance":0
    }
 ]
@@ -110,6 +110,6 @@ Output
 
 ### TOOO
 [ ] Simplify installation  
-[ ] Rounding errors due to floats  
+[x] Rounding errors due to floats  
 [ ] Better error handling  
 [ ] Cleanup and comment code  

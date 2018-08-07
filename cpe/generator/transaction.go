@@ -1,51 +1,53 @@
 package main
 
 import (
+	"math"
 	"sort"
 	"time"
 
 	"github.com/epointpayment/mloc-tools/cpe/generator/models"
 
 	"github.com/jmcvetta/randutil"
+	"github.com/shopspring/decimal"
 )
 
 type Transactions struct {
-	StartTime  time.Time
-	StopTime   time.Time
-	MaxNum     int
-	Multiplier float64
-	Balance    Balance
-	Credit     Credit
-	Debit      Debit
+	StartTime time.Time
+	StopTime  time.Time
+	MaxNum    int
+	Precision int
+	Balance   Balance
+	Credit    Credit
+	Debit     Debit
 }
 
 type Balance struct {
-	RangeMin float64
-	RangeMax float64
+	RangeMin int
+	RangeMax int
 }
 
 type Credit struct {
 	Name         string
 	Weight       int
-	RangeMin     float64
-	RangeMax     float64
+	RangeMin     int
+	RangeMax     int
 	Descriptions []string
 }
 
 type Debit struct {
 	Name         string
 	Weight       int
-	RangeMin     float64
-	RangeMax     float64
+	RangeMin     int
+	RangeMax     int
 	Descriptions []string
 }
 
 func NewTransactions() *Transactions {
 	t := &Transactions{
-		StartTime:  time.Date(2015, time.January, 1, 0, 0, 0, 0, time.UTC),
-		StopTime:   time.Now().UTC(),
-		MaxNum:     1000,
-		Multiplier: 100,
+		StartTime: time.Date(2015, time.January, 1, 0, 0, 0, 0, time.UTC),
+		StopTime:  time.Now().UTC(),
+		MaxNum:    1000,
+		Precision: 2,
 		Balance: Balance{
 			RangeMin: 0,
 			RangeMax: 100,
@@ -99,27 +101,27 @@ func (t *Transactions) Generate() []*models.Transactions {
 		transactionType := t.generateTransactionType()
 		switch transactionType {
 		case t.Credit.Name:
-			transaction.Credit = t.generateAmount(t.Credit.RangeMin, t.Credit.RangeMax, t.Multiplier)
+			transaction.Credit = t.generateAmount(t.Credit.RangeMin, t.Credit.RangeMax, t.Precision)
 			transaction.Description = t.generateDescription(t.Credit.Descriptions)
 		case t.Debit.Name:
-			transaction.Debit = t.generateAmount(t.Debit.RangeMin, t.Debit.RangeMax, t.Multiplier)
+			transaction.Debit = t.generateAmount(t.Debit.RangeMin, t.Debit.RangeMax, t.Precision)
 			transaction.Description = t.generateDescription(t.Debit.Descriptions)
 		}
 
 		if transactionType == t.Debit.Name {
 			// Cannot debit without positive balance, wait for credit instead
-			if balance == 0 {
+			if balance.Equal(decimal.Zero) {
 				continue
 			}
 
 			// Replace generated debit amount to empty account
-			if balance-transaction.Debit < 0 {
+			if balance.Sub(transaction.Debit).LessThan(decimal.Zero) {
 				transaction.Debit = balance
 			}
 		}
 
-		netChange := transaction.Credit - transaction.Debit
-		balance = balance + netChange
+		netChange := transaction.Credit.Sub(transaction.Debit)
+		balance = balance.Add(netChange)
 		transaction.Balance = balance
 
 		transactions = append(transactions, transaction)
@@ -141,8 +143,8 @@ func (t *Transactions) generateTimestamps() []int {
 	return timestamps
 }
 
-func (t *Transactions) generateBalance() float64 {
-	return t.generateAmount(t.Balance.RangeMin, t.Balance.RangeMax, t.Multiplier)
+func (t *Transactions) generateBalance() decimal.Decimal {
+	return t.generateAmount(t.Balance.RangeMin, t.Balance.RangeMax, t.Precision)
 }
 
 func (t *Transactions) generateTransactionType() string {
@@ -161,9 +163,11 @@ func (t *Transactions) generateTransactionType() string {
 	return choice.Item.(string)
 }
 
-func (t *Transactions) generateAmount(rangeMin, rangeMax, multiplier float64) float64 {
-	amount, _ := randutil.IntRange(int(rangeMin*multiplier), int(rangeMax*multiplier))
-	return float64(amount) / multiplier
+func (t *Transactions) generateAmount(rangeMin int, rangeMax int, precision int) decimal.Decimal {
+	amount, _ := randutil.IntRange(int(rangeMin*int(math.Pow10(precision))), int(rangeMax*int(math.Pow10(precision))))
+	// return float64(amount) / multiplier
+
+	return decimal.New(int64(amount), 0).Div(decimal.New(1, int32(precision)))
 }
 
 func (t *Transactions) generateDescription(descriptions []string) string {
