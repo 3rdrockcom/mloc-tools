@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/classifier"
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/csv"
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/probability"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/classifier"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/csv"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/probability"
 
 	"github.com/fatih/color"
 )

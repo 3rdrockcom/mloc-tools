@@ -3,9 +3,9 @@ package probability
 import (
 	"sort"
 
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/models"
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/probability/day"
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/probability/weekday"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/models"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/probability/day"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/probability/weekday"
 )
 
 var Debug bool

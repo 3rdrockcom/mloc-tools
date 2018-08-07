@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/epointpayment/customerprofilingengine-demo-classifier/pkg/models"
+	"github.com/epointpayment/mloc-tools/cpe/profiler/pkg/models"
 )
 
 type CSV struct {
