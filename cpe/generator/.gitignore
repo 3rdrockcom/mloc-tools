@@ -1,0 +1,7 @@
+# OS
+.directory
+
+# App
+/faker
+/faker.db
+/gin-bin
