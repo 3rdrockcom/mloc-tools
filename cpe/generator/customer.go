@@ -2,7 +2,7 @@ package main
 
 import (
 	randomdata "github.com/Pallinder/go-randomdata"
-	"github.com/proteogenic/eps-cpe-demo-faker/models"
+	"github.com/epointpayment/mloc-tools/cpe/generator/models"
 )
 
 type Customer struct{}

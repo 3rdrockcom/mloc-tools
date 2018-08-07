@@ -4,7 +4,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/proteogenic/eps-cpe-demo-faker/models"
+	"github.com/epointpayment/mloc-tools/cpe/generator/models"
 
 	"github.com/jmcvetta/randutil"
 )

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/proteogenic/eps-cpe-demo-faker/models"
+	"github.com/epointpayment/mloc-tools/cpe/generator/models"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"

@@ -6,8 +6,11 @@ This project generates seed data accessible via REST-based API.
 ### Instructions
 ```bash
 # Get package
-go get github.com/epointpayment/customerprofilingengine-demo-faker
-cd $GOPATH/src/github.com/epointpayment/customerprofilingengine-demo-faker
+go get github.com/epointpayment/mloc-tools/cpe/generator
+cd $GOPATH/src/github.com/epointpayment/mloc-tools/cpe/generator
+
+# Get dependencies
+go get
 
 # Build exec
 go build -o faker
@@ -106,7 +109,7 @@ Output
 ```
 
 ### TOOO
-[ ] Simplify installation
+[ ] Simplify installation  
 [ ] Rounding errors due to floats  
-[ ] Better error handling
-[ ] Cleanup and comment code
+[ ] Better error handling  
+[ ] Cleanup and comment code  

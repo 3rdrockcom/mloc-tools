@@ -4,8 +4,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/epointpayment/mloc-tools/cpe/generator/models"
 	"github.com/gin-gonic/gin"
-	"github.com/proteogenic/eps-cpe-demo-faker/models"
 )
 
 func NewRouter() *gin.Engine {
