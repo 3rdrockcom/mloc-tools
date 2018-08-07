@@ -59,8 +59,6 @@ func NewTransactions() *Transactions {
 			RangeMax: 500,
 			Descriptions: []string{
 				"Bank Deposit",
-				"Ebay",
-				"Amazon",
 				"Gift",
 				"Cashed Check",
 			},
@@ -165,7 +163,6 @@ func (t *Transactions) generateTransactionType() string {
 
 func (t *Transactions) generateAmount(rangeMin int, rangeMax int, precision int) decimal.Decimal {
 	amount, _ := randutil.IntRange(int(rangeMin*int(math.Pow10(precision))), int(rangeMax*int(math.Pow10(precision))))
-	// return float64(amount) / multiplier
 
 	return decimal.New(int64(amount), 0).Div(decimal.New(1, int32(precision)))
 }
