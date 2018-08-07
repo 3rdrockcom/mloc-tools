@@ -16,9 +16,10 @@ func (c *Customer) Generate() *models.Customers {
 	profile := randomdata.GenerateProfile(randomdata.RandomGender)
 
 	return &models.Customers{
-		Email:     profile.Email,
-		Gender:    profile.Gender,
-		FirstName: profile.Name.First,
-		LastName:  profile.Name.Last,
+		Email:        profile.Email,
+		Gender:       profile.Gender,
+		FirstName:    profile.Name.First,
+		LastName:     profile.Name.Last,
+		MobileNumber: profile.Phone,
 	}
 }
