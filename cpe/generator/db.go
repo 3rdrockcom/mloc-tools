@@ -4,13 +4,14 @@ import (
 	"github.com/epointpayment/mloc-tools/cpe/generator/models"
 
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
 )
 
 var db *gorm.DB
 
 func NewDB(dbName string) *gorm.DB {
-	db, err := gorm.Open("sqlite3", dbName)
+	db, err := gorm.Open("mysql", dbName)
 	if err != nil {
 		panic("failed to connect database")
 	}

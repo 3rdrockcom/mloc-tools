@@ -19,10 +19,10 @@ go build -o faker
 touch faker.db
 
 # Seed the database
-./faker -seed
+./faker -seed -dsn=user:password@localhost:3306/dbname?parseTime=true
 
 # Start Server
-./faker
+./faker -dsn=user:password@localhost:3306/dbname?parseTime=true
 ```
 
 ### Endpoints

@@ -5,17 +5,18 @@ import (
 	"os"
 )
 
+var dsn string
 var doSeed bool
 
 func init() {
+	flag.StringVar(&dsn, "dsn", "", "e.g. user:password@localhost:3306/dbname?parseTime=true")
 	flag.BoolVar(&doSeed, "seed", false, "seed the database")
-
 	flag.Parse()
 }
 
 func main() {
 	// Database
-	db = NewDB("faker.db")
+	db = NewDB(dsn)
 	defer db.Close()
 
 	if doSeed {
